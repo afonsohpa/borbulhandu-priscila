@@ -463,11 +463,11 @@
 <!-- PREÇOS -->
 <section class="prices">
   <div class="container">
-    <h2 class="section-title">Tamanhos & Preços</h2>
+    <h2 class="section-title">Preço</h2>
     <div class="price-grid">
       <div class="price-card featured">
         <div class="badge-top">⭐ Mais Vendido</div>
-        <div class="price-size">Pote Grande</div>
+        <div class="price-size">Pote de Pipoca</div>
         <div class="price-ml">150ml</div>
         <div class="price-value"><span>R$</span>19,90</div>
         <div class="price-note">Perfeito para compartilhar</div>
@@ -568,7 +568,7 @@
                 <div class="prod-icon">🍫</div>
                 <div class="prod-info">
                   <div class="prod-name">Nutella</div>
-                  <div class="prod-size">Pote Grande · 150ml</div>
+                  <div class="prod-size">Pote de Pipoca · 150ml</div>
                 </div>
                 <div class="prod-price">R$19,90</div>
               </div>
@@ -587,7 +587,7 @@
                 <div class="prod-icon">🧂</div>
                 <div class="prod-info">
                   <div class="prod-name">Caramelo Salgado</div>
-                  <div class="prod-size">Pote Grande · 150ml</div>
+                  <div class="prod-size">Pote de Pipoca · 150ml</div>
                 </div>
                 <div class="prod-price">R$19,90</div>
               </div>
@@ -637,6 +637,12 @@
         </div>
 
 
+        <!-- Aviso -->
+        <div style="background:rgba(247,208,0,.1);border:2px solid var(--yellow);border-radius:16px;padding:20px;margin-bottom:16px;text-align:center;line-height:1.8;">
+          <p style="font-weight:900;font-size:15px;color:var(--yellow);">⚠️ Antes de efetuar seu pagamento:</p>
+          <p style="font-size:14px;margin-top:6px;">Combine a entrega ou retirada.<br>Não esqueça de encaminhar o pedido e o comprovante pelo WhatsApp.</p>
+        </div>
+
         <!-- PIX -->
         <div style="background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.15);border-radius:16px;padding:20px;margin-bottom:16px;text-align:center;">
           <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.6;margin-bottom:8px;">💳 Chave PIX para pagamento</div>
@@ -677,8 +683,8 @@
   }
 
   const PRODUCTS = [
-    { name: 'Nutella – Pote Grande 150ml',                    price: 19.90 },
-    { name: 'Caramelo Salgado – Pote Grande 150ml',           price: 19.90 },
+    { name: 'Nutella – Pote de Pipoca 150ml',                    price: 19.90 },
+    { name: 'Caramelo Salgado – Pote de Pipoca 150ml',           price: 19.90 },
     { name: '💚 Pipoca Solidária (Doação Instituto Elementar)', price: 19.90 },
   ];
 
@@ -732,22 +738,27 @@
     ).join('\n');
 
     const msg = encodeURIComponent(
-`🍿 *PEDIDO – Borbulhandu Sabores* 🍿
-
-🧑‍💼 *Vendedor(a):* ${vendedor}
-👤 *Nome:* ${nome}
-📱 *WhatsApp:* ${whatsapp}
-
-🛒 *Itens do Pedido:*
-${linhasItens}
-
-💰 *Total estimado:* ${fmt(totalGeral)}
-${endereco ? `\n📍 *Entrega/Retirada:* ${endereco}` : ''}
-
-💳 *PIX para pagamento:*
-pipoca@borbulhandu.com.br
-
-Aguardo a confirmação do meu pedido! 😊`
+[
+'*PEDIDO – Borbulhandu Sabores*',
+'',
+'*Vendedor(a):* ' + vendedor,
+'*Nome:* ' + nome,
+'*WhatsApp:* ' + whatsapp,
+'',
+'*Itens do Pedido:*',
+linhasItens,
+'',
+'*Total estimado:* ' + fmt(totalGeral),
+endereco ? '*Entrega/Retirada:* ' + endereco : '',
+'',
+'*PIX para pagamento:*',
+'pipoca@borbulhandu.com.br',
+'',
+'Antes de efetuar seu pagamento, combine a entrega ou retirada.',
+'Nao esqueca de encaminhar o pedido e o comprovante pelo WhatsApp.',
+'',
+'Aguardo a confirmacao!'
+].filter(l => l !== null).join('\n')
     );
 
     window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
